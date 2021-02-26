@@ -1,0 +1,15 @@
+{
+    "name": "nickpsal/mvcframework",
+    "authors": [
+        {
+            "name": "nickpsal",
+            "email": "nickpsal@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
