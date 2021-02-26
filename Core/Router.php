@@ -25,7 +25,7 @@ use app\core\Application;
 
         public function resolve() {
             $path = $this->request->getPath();
-            $method = $this->request->getMethod();
+            $method = $this->request->method();
             $callback = $this->routes[$method][$path] ?? false;
             if ($callback === false) {
                 $this->response->setStatusCode(404);
