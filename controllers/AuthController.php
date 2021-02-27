@@ -8,6 +8,7 @@
             if ($request->isPost()) {
                 echo "Handling submitted data";
             }else {
+                $this->setLayout('auth');
                 echo $this->render('login');
             }
         }
@@ -16,6 +17,7 @@
             if ($request->isPost()) {
                 echo 'Handlign submitted data';
             }else {
+                $this->setLayout('auth');
                 echo $this->render('register');
             }
         }
