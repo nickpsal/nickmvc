@@ -8,10 +8,7 @@
             if ($request->isPost()) {
                 echo "Handling submitted data";
             }else {
-                $params = [
-                    'title' => 'Login Page'
-                ];
-                echo $this->render('login',$params);
+                echo $this->render('login');
             }
         }
 
@@ -19,10 +16,7 @@
             if ($request->isPost()) {
                 echo 'Handlign submitted data';
             }else {
-                $params = [
-                    'title' => 'Register Page'
-                ];
-                echo $this->render('register',$params);
+                echo $this->render('register');
             }
         }
     }

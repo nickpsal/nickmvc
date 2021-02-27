@@ -6,10 +6,7 @@
 
 class SiteController extends Controller{
         public function home(){
-            $params = [
-                'title' => 'HomePage'
-            ];
-            echo $this->render('home', $params);
+            echo $this->render('home');
         }
 
         public function handleContact(Request $request) {
@@ -17,10 +14,7 @@ class SiteController extends Controller{
         }
 
         public function Contact() {
-            $params = [
-                'title' => 'Contact Page'
-            ];
-            echo $this->render('contact',$params);
+            echo $this->render('contact');
         }
     }
 ?>
