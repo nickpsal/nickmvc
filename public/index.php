@@ -3,6 +3,7 @@
 
     use app\controllers\AuthController;
     use app\controllers\SiteController;
+    use app\controllers\Controller;
     use app\core\Application;
     
     $app = new Application(dirname(__DIR__));
