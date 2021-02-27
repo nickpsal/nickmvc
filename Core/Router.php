@@ -1,8 +1,8 @@
 <?php
     namespace app\core;
 
-use app\controllers\SiteController;
-use app\core\Application;
+    use app\controllers\SiteController;
+    use app\core\Application;
 
     class Router{
         public Request $request;
@@ -43,24 +43,18 @@ use app\core\Application;
         }
         
         public function renderView($view, $params=[]) {
-            $layoutContent = $this->layoutContent($params);
-            $viewContent = $this->renderonlyView($view,$params);
+            $layoutContent = $this->layoutContent();
+            $viewContent = $this->renderonlyView($view);
             return str_replace('{{Content}}', $viewContent,$layoutContent);
         }
 
-        protected function layoutContent($params) {
-            foreach ($params as $key => $value) {
-                $$key = $value; 
-            }
+        protected function layoutContent() {
             ob_start();
             include_once Application::$ROOT_DIR . "/views/layouts/main.php";
             return ob_get_clean();
         }
 
-        protected function renderonlyView($view, $params) {
-            foreach ($params as $key => $value) {
-                $$key = $value; 
-            }
+        protected function renderonlyView($view) {
             ob_start();
             include_once Application::$ROOT_DIR . "/views/$view.php";
             return ob_get_clean();
