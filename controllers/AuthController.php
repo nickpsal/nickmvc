@@ -21,9 +21,6 @@
                 $registerModel->loadData($request->getBody());
                 if ($registerModel->validate() && $registerModel->register()) {
                 }else {
-                    echo "<pre>";
-                    var_dump($registerModel->errors);
-                    echo "</pre>";
                     return 'success';
                     return $this->render('register', [
                         'model' => $registerModel 
