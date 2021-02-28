@@ -2,12 +2,12 @@
     namespace app\models;
     use app\core\model;
     class RegisterModel extends model{
-        public string $firstName;
-        public string $LastName;
-        public string $email;
-        public string $username;
-        public string $password;
-        public string $confirm_password;
+        public string $firstName = '';
+        public string $LastName = '';
+        public string $email = '';
+        public string $username = '';
+        public string $password = '';
+        public string $confirm_password = '';
         
         public function register() {
             echo "creating new user";

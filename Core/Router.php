@@ -39,13 +39,13 @@
                     Application::$app->controller = new $callback[0]();
                     $callback[0] = Application::$app->controller;
                 }
-                call_user_func($callback, $this->request);
+                return call_user_func($callback, $this->request);
             }
         }
         
         public function renderView($view, $params=[]) {
             $layoutContent = $this->layoutContent();
-            $viewContent = $this->renderonlyView($view);
+            $viewContent = $this->renderonlyView($view, $params);
             return str_replace('{{Content}}', $viewContent,$layoutContent);
         }
 
@@ -56,7 +56,10 @@
             return ob_get_clean();
         }
 
-        protected function renderonlyView($view) {
+        protected function renderonlyView($view, $params) {
+            foreach ($params as $key => $value) {
+                $$key = $value; 
+            }
             ob_start();
             include_once Application::$ROOT_DIR . "/views/$view.php";
             return ob_get_clean();

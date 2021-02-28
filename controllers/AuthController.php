@@ -8,28 +8,29 @@
         public array $errors  = [];
         public function login(Request $request) {
             if ($request->isPost()) {
-                echo 'Handlign submitted data';
+                return 'Handlign submitted data';
             }else {
                 $this->setLayout('auth');
-                echo $this->render('login');
+                return $this->render('login');
             }
         }
 
         public function register(Request $request) {
+            $registerModel = new RegisterModel();
             if ($request->isPost()) {
-                $registerModel = new RegisterModel();
                 $registerModel->loadData($request->getBody());
                 if ($registerModel->validate() && $registerModel->register()) {
-                }else {
                     return 'success';
+                }else {
+                    $this->setLayout('auth');
                     return $this->render('register', [
                         'model' => $registerModel 
                     ]);
                 }
-            }else {
-                $this->setLayout('auth');
-                echo $this->render('register');
             }
+            return $this->render('register', [
+                'model' => $registerModel 
+            ]);
         }
     }
 ?>
