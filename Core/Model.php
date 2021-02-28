@@ -11,8 +11,7 @@
         public function loadData($data) {
             foreach ($data as $key => $value) {
                 if (property_exists($this,$key)){
-                    $this->{$key} = $value;
-                    
+                    $this->{$key} = $value;             
                 }
             }
         }
@@ -31,14 +30,24 @@
                     }
                     if ($rulename === self::RULE_REQUIRED && !$value) {
                        $this->addError($attribute, self::RULE_REQUIRED); 
+                    }else if ($rulename === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)){
+                        $this->addError($attribute, self::RULE_EMAIL); 
+                    }elseif ($rulename === self::RULE_MIN && strlen($value) < $rule['min']) {
+                        $this->addError($attribute, self::RULE_MIN, $rule); 
+                    }elseif ($rulename === self::RULE_MAX && strlen($value) > $rule['max']) {
+                        $this->addError($attribute, self::RULE_MAX, $rule); 
                     }
-                }
+                } 
             }
             return empty($this->errors);  
         }
 
-        public function addError(string $attribute, string $rule) {
-            $this->errors[$attribute][] = $this->errorMessages()[$rule] ?? '';
+        public function addError(string $attribute, string $rule, $ErrorParams = []) {
+            $message = $this->errorMessages()[$rule] ?? '';
+            foreach ($ErrorParams as $key => $param) {
+                $message = str_replace("{{$key}}", $param, $message);
+            }
+            $this->errors[$attribute][] = $message;
         }
 
         public function errorMessages() {

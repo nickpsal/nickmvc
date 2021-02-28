@@ -1,7 +1,5 @@
 <?php
     namespace app\core;
-
-    use app\controllers\SiteController;
     use app\core\Request;
 
     class Application{
