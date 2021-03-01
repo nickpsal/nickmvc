@@ -1,5 +1,5 @@
 <?php
-    class mig001_something{
+    class mig002_something{
         public function up(){
             echo "Applying migration";
         }
