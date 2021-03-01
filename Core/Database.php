@@ -8,7 +8,7 @@
             $user = $config['username'] ?? '' ;
             $password = $config['password'] ?? '' ;
             $this->pdo = new \PDO($dsn, $user, $password);
-            //we need this so thw pdo throws any error presented
+            //we need this so the pdo throws any error presented
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
         } 
 
@@ -29,7 +29,6 @@
                 $this->log("Migration $migration ended succefully");
                 $newMigrations[] = $migration;
             }
-
             if (!empty($newMigrations)) {
                 $this->saveMigrations($newMigrations);
             }else {
@@ -38,15 +37,17 @@
         }
 
         public function createMigrationsTable() {
-            $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(
+            $query = "CREATE TABLE IF NOT EXISTS migrations(
                 id INT(6) AUTO_INCREMENT PRIMARY KEY,
                 migration VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )ENGINE=INNODB;");
+                )ENGINE=INNODB;";
+            $this->pdo->exec($query);
         }
 
         public function getAppliedMigrations() {
-            $statement = $this->pdo->prepare('SELECT migration FROM migrations');
+            $query = "SELECT migration FROM migrations";
+            $statement = $this->pdo->prepare($query);
             $statement->execute();
             return $statement->fetchAll(\PDO::FETCH_COLUMN);
         }
