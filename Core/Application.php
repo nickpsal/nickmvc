@@ -7,14 +7,16 @@
         public Request $request;
         public Router $router;
         public Response $response;
+        public Database $db;
         public Controller $controller;
         public static Application $app;
         
-        public function __construct($rootPath){
+        public function __construct($rootPath, array $config){
             self::$ROOT_DIR = $rootPath;
             self::$app = $this;
             $this->response = new Response();
             $this->request = new Request();
+            $this->db = new Database($config['db']);
             $this->router = new Router($this->request, $this->response);
         }
 
