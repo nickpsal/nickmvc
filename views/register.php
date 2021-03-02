@@ -1,6 +1,5 @@
 <h1>Register Page</h1>
-<?php
-$form = \app\core\Form\Form::begin('', 'post');?>
+<?php $form = \app\core\Form\Form::begin('', 'post');?>
 <div class="row">
     <div class="col">
         <?php echo $form->field($model,'firstName'); ?>
