@@ -7,6 +7,7 @@
         public Request $request;
         public Router $router;
         public Response $response;
+        public Session $session;
         public Database $db;
         public Controller $controller;
         public static Application $app;
@@ -16,6 +17,7 @@
             self::$app = $this;
             $this->response = new Response();
             $this->request = new Request();
+            $this->session = new SEssion();
             $this->db = new Database($config['db']);
             $this->router = new Router($this->request, $this->response);
         }

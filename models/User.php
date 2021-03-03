@@ -30,8 +30,8 @@
             return [
                 'firstName' => [self::RULE_REQUIRED],
                 'LastName' => [self::RULE_REQUIRED],
-                'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
-                'username' => [self::RULE_REQUIRED],
+                'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
+                'username' => [self::RULE_REQUIRED,[self::RULE_UNIQUE_USERNAME, 'class' => self::class]],
                 'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8],[self::RULE_MAX, 'max' => 24]],
                 'confirm_password' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
             ];
@@ -40,6 +40,17 @@
         public function attributes(): array {
             return [
                 'email', 'firstName', 'LastName', 'username' , 'password', 'status' 
+            ];
+        }
+
+        public function labels():array {
+            return [
+                'firstName' => 'First Name',
+                'LastName' => 'Last Name',
+                'email' => 'Email Address',
+                'username' => 'Username',
+                'password' => 'Password',
+                'confirm_password' => 'Confirm Password'
             ];
         }
     }

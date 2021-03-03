@@ -11,7 +11,7 @@
             //we need this so the pdo throws any error presented
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
         } 
-
+        
         public function apply_Migrations() {
             $this->createMigrationsTable();
             $appliedMigrations = $this->getAppliedMigrations();   

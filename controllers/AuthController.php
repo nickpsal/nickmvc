@@ -1,5 +1,7 @@
 <?php
     namespace app\controllers;
+
+    use app\core\Application;
     use app\core\Controller;
     use app\core\Request;
     use app\models\User;
@@ -20,7 +22,9 @@
             if ($request->isPost()) {
                 $user->loadData($request->getBody());
                 if ($user->validate() && $user->save()) {
-                    return 'success';
+                    Application::$app->session->setFlash('success', 'thanks for registered');
+                    Application::$app->response->redirect('/');
+                    exit;
                 }else {
                     $this->setLayout('auth');
                     return $this->render('register', [
