@@ -4,17 +4,24 @@
     use app\core\Application;
     use app\core\Controller;
     use app\core\Request;
+    use app\core\Response;
     use app\models\User;
+    use app\models\LoginForm;
 
     class AuthController extends Controller{
         public array $errors  = [];
-        public function login(Request $request) {
+        public function login(Request $request, Response $response) {
+            $user = new User();
+            $loginform = new LoginForm();
             if ($request->isPost()) {
-                return 'Handlign submitted data';
-            }else {
-                $this->setLayout('auth');
-                return $this->render('login');
+                $loginform->loadData($request->getBody());
+                if ($loginform->validate() && $loginform->login()) {
+                    $response->redirect('/');
+                    return;
+                } 
             }
+            $this->setLayout('auth');
+            return $this->render('register');
         }
 
         public function register(Request $request) {

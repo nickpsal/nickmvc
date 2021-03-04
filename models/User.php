@@ -1,7 +1,5 @@
 <?php
     namespace app\models;
-    use app\core\Application;
-    use app\core\Model;
     use app\core\dbModel;
     
     class User extends dbModel{

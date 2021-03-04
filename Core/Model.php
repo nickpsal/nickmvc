@@ -66,6 +66,10 @@
             }
             $this->errors[$attribute][] = $message;
         }
+
+        public function errorMessage(string $attribute, string $message) {
+            $this->errors[$attribute][] = $message;
+        }
         
         public function hasError($attribute){
             return $this->errors[$attribute] ?? false;

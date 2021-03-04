@@ -1,6 +1,8 @@
 <?php
     namespace app\core;
     use app\core\model;
+    use app\models\User;
+
     abstract class dbModel extends Model{
         abstract public function tablename():string;
 
@@ -20,6 +22,10 @@
 
         public static function prepare($sql) {
             return Application::$app->db->pdo->prepare($sql);
+        }
+
+        public static function findOne($where) {   
+
         }
     }
 ?>
